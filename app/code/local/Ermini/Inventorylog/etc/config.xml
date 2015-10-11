@@ -47,6 +47,14 @@
                     </ermini_inventorylog>
                 </observers>
             </cataloginventory_stock_item_save_after>
+            <checkout_submit_all_after>
+                <observers>
+                    <ermini_inventorylog>
+                        <class>inventorylog/observer</class>
+                        <method>checkoutAllSubmitAfter</method>
+                    </ermini_inventorylog>
+                </observers>
+            </checkout_submit_all_after>
         </events>
     </global>
     <!-- for testing purposes-->
