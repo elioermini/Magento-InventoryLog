@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <inventorylog translate="title" module="inventorylog">
+                    <title>Inventory Changes</title>
+                    <sort_order>1100</sort_order>
+                    <action>adminhtml/inventorylog</action>
+                </inventorylog>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <inventorylog translate="title" module="inventorylog">
+                                <title>Inventory Changes</title>
+                            </inventorylog>
+                        </children>
+                    </catalog>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <inventorylog translate="title" module="inventorylog">
+                                        <title>Inventory Changes</title>
+                                    </inventorylog>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

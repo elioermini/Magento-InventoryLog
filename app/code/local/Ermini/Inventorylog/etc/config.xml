@@ -20,11 +20,11 @@
                 </entities>
             </inventorylog_resource>
         </models>
-     <!--   <blocks>
+        <blocks>
             <ermini_inventorylog>
                 <class>Ermini_Inventorylog_Block</class>
             </ermini_inventorylog>
-        </blocks>-->
+        </blocks>
         <helpers>
             <inventorylog>
                 <class>Ermini_Inventorylog_Helper</class>
@@ -61,4 +61,26 @@
             </inventorylog>
         </routers>
     </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Ermini_Inventorylog>
+                    <files>
+                        <default>Ermini_Inventorylog.csv</default>
+                    </files>
+                </Ermini_Inventorylog>
+            </modules>
+        </translate>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <ermini_inventorylog before="Mage_Adminhtml">Ermini_Inventorylog_Adminhtml</ermini_inventorylog>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 </config>
