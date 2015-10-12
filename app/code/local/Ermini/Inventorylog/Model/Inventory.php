@@ -18,12 +18,11 @@ class Ermini_Inventorylog_Model_Inventory extends Mage_Core_Model_Abstract
     }
 
     /**
-     * @param Mage_CatalogInventory_Model_Stock_Item $item
+     * @param $item
      * @param $message
      */
     public function insertStockLog($item, $message)
     {
-        $date=$this->getDate();
         $helper=Mage::helper('inventorylog');
         $originalQty = (int)$item->getOrigData('qty');
         $newQty = (int)$item->getData('qty');
@@ -37,12 +36,8 @@ class Ermini_Inventorylog_Model_Inventory extends Mage_Core_Model_Abstract
             ->setQty($newQty)
             ->setIsInStock((int)$item->getIsInStock())
             ->setMessage($message)
-            ->setCreatedAt($date)
+            ->setCreatedAt($helper->getDate())
             ->save();
-    }
-
-    public function getDate(){
-        return Varien_Date::formatDate(time());
     }
 
 }
