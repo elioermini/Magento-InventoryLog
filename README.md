@@ -11,5 +11,5 @@ triggered by an admin user, by the APIs or by a purchase)
 The sku is deliberately not saved in the entity since can change over the time. This is later on joined from the catalog/product model.
 
 Todo
-integration with ModMan
-track the product stocks after an import
+  - integration with ModMan
+  - track the product stocks after an import
