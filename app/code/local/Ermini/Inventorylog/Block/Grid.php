@@ -16,10 +16,5 @@ class Ermini_Inventorylog_Block_Grid extends Mage_Adminhtml_Block_Widget_Grid_Co
         $this->_removeButton('add');
             }
 
-   // public function getCreateUrl()
-   // {
-    //    return $this->getUrl('*/*/new');
-   // }
-
 }
 

@@ -18,9 +18,17 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
         $this->setSaveParametersInSession(true);
     }
 
+    /**
+     * @return Mage_Adminhtml_Block_Widget_Grid
+     * products that don't exist anymore (no sku found) are hidden in the list
+     */
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('inventorylog/inventory')->getCollection();
+        $collection = Mage::getResourceModel('inventorylog/inventory_collection')->join(
+            'catalog/product',
+            '`catalog/product`.entity_id=`main_table`.item_id',
+            'catalog/product.sku'
+        );
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -49,7 +57,7 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
                 'width' => '40px',
                 'index' => 'item_id',
                 'frame_callback' => array($this, 'callback_sku'),
-//                'filter_condition_callback' => array($this, 'filter_sku'),
+                'filter_condition_callback' => array($this, 'filter_sku'),
             )
         );
         $this->addColumn('message',
@@ -145,16 +153,24 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
         return $this;
     }
 
-    public function callback_sku($id)
+    public function callback_sku($value, $row, $column, $isExport)
     {
+        $id=$value;
         $_product = Mage::getModel('catalog/product')->load($id);
         if($_product->getId()){
-        return $_product->getData('sku');
+            $sku=$_product->getData('sku');
+            $html = sprintf(
+                '<a href="%s" title="%s">%s</a>',
+                $this->getUrl('adminhtml/catalog_product/edit', array('id' => $id)),
+                Mage::helper('inventorylog')->__('Edit Product'),
+                $sku
+            );
+        return $html;
         }
         return Mage::helper('inventorylog')->__("Product not in Catalog");
     }
 
-    public function filter_sku($column)
+    public function filter_sku($collection, $column)
     {
         if (!$value = $column->getFilter()->getValue()) {
             return $this;
