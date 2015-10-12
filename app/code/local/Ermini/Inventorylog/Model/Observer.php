@@ -58,7 +58,7 @@ class Ermini_Inventorylog_Model_Observer
 
         if (!empty($stockItems)) {
             foreach ($stockItems as $data) {
-                $this->insertStockLog($data['item'], sprintf(
+                Mage::getModel('inventorylog/inventory')->insertStockLog($data['item'], sprintf(
                     'Product ordered (order%s: %s)',
                     count($data['orders']) > 1 ? 's' : '',
                     implode(', ', $data['orders'])

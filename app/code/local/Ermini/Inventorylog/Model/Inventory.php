@@ -21,7 +21,7 @@ class Ermini_Inventorylog_Model_Inventory extends Mage_Core_Model_Abstract
      * @param Mage_CatalogInventory_Model_Stock_Item $item
      * @param $message
      */
-    public function insertStockLog(Mage_CatalogInventory_Model_Stock_Item $item, $message)
+    public function insertStockLog($item, $message)
     {
         $date=$this->getDate();
         $helper=Mage::helper('inventorylog');

@@ -105,7 +105,8 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
             array(
                 'header' => Mage::helper('inventorylog')->__('Quantity'),
                 'width' => '40px',
-                'index' => 'qty'
+                'index' => 'qty',
+                'frame_callback' =>array($this,'callback_qty')
             )
         );
         $this->addColumn('is_in_stock', array(
@@ -190,5 +191,10 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
             return "+" . (int)$difference;
         }
         return (int)$difference;
+    }
+
+    public function callback_qty($qty)
+    {
+        return (int)$qty;
     }
 }
