@@ -10,7 +10,7 @@ class Ermini_Inventorylog_IndexController extends Mage_Core_Controller_Front_Act
 {
 
     /**
-     *test class to test model
+     *test class to test Ermini_Inventorylog Model
      */
     public function testModelAction()
     {
