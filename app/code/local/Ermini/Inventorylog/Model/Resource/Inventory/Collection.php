@@ -6,10 +6,14 @@
  * Date: 11/10/15
  * Time: 01:23
  */
+
+/**
+ * Class Ermini_Inventorylog_Model_Resource_Inventory_Collection
+ */
 class Ermini_Inventorylog_Model_Resource_Inventory_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
     /**
-     * loop in the object Ermini_invontorylog
+     * @_construct of Ermini_Inventorylog_Model_Resource_Inventory_Collection needed for listing collections of Object
      */
     public function _construct()
     {

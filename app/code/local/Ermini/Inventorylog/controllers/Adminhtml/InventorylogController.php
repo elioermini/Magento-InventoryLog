@@ -1,12 +1,13 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Elio
  * Date: 11/10/15
  * Time: 01:31
  */
-
-class Ermini_Inventorylog_Adminhtml_InventorylogController extends Mage_Adminhtml_Controller_Action {
+class Ermini_Inventorylog_Adminhtml_InventorylogController extends Mage_Adminhtml_Controller_Action
+{
 
     public function indexAction()
     {
@@ -15,6 +16,9 @@ class Ermini_Inventorylog_Adminhtml_InventorylogController extends Mage_Adminhtm
         $this->renderLayout();
     }
 
+    /**
+     * Export to Csv
+     */
     public function exportCsvAction()
     {
         $fileName = 'inventorylog_export.csv';
@@ -22,6 +26,9 @@ class Ermini_Inventorylog_Adminhtml_InventorylogController extends Mage_Adminhtm
         $this->_prepareDownloadResponse($fileName, $content);
     }
 
+    /**
+     * Export to Excel
+     */
     public function exportExcelAction()
     {
         $fileName = 'inventorylog_export.xml';
@@ -29,6 +36,9 @@ class Ermini_Inventorylog_Adminhtml_InventorylogController extends Mage_Adminhtm
         $this->_prepareDownloadResponse($fileName, $content);
     }
 
+    /**
+     * Deletes entries 1 or more
+     */
     public function massDeleteAction()
     {
         $ids = $this->getRequest()->getParam('ids');

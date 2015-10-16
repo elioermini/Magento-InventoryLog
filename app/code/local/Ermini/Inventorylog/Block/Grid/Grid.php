@@ -6,6 +6,10 @@
  * Date: 11/10/15
  * Time: 02:30
  */
+
+/**
+ * Class Ermini_Inventorylog_Block_Grid_Grid
+ */
 class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 
@@ -16,6 +20,45 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
         $this->setDefaultSort('movement_id');
         $this->setDefaultDir('desc');
         $this->setSaveParametersInSession(true);
+    }
+
+    public function callback_sku($value, $row, $column, $isExport)
+    {
+        $id = $value;
+        $_product = Mage::getModel('catalog/product')->load($id);
+        if ($_product->getId()) {
+            $sku = $_product->getData('sku');
+            $html = sprintf(
+                '<a href="%s" title="%s">%s</a>',
+                $this->getUrl('adminhtml/catalog_product/edit', array('id' => $id)),
+                Mage::helper('inventorylog')->__('Edit Product'),
+                $sku
+            );
+            return $html;
+        }
+        return Mage::helper('inventorylog')->__("Product not in Catalog");
+    }
+
+    public function filter_sku($collection, $column)
+    {
+        if (!$value = $column->getFilter()->getValue()) {
+            return $this;
+        }
+
+        $this->getCollection()->getSelect()->where(
+            "sku like ?"
+            , "%$value%");
+
+        return $this;
+
+    }
+
+    public function callback_movement($difference)
+    {
+        if ($difference > 0) {
+            return "+" . (int)$difference;
+        }
+        return (int)$difference;
     }
 
     /**
@@ -33,7 +76,6 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
         return parent::_prepareCollection();
     }
 
-
     protected function _prepareColumns()
     {
 
@@ -44,13 +86,13 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
                 'index' => 'movement_id'
             )
         );
- /*       $this->addColumn('item_id',
-            array(
-                'header' => Mage::helper('inventorylog')->__('Product ID'),
-                'width' => '40px',
-                'index' => 'item_id'
-            )
-        );*/
+        /*       $this->addColumn('item_id',
+                   array(
+                       'header' => Mage::helper('inventorylog')->__('Product ID'),
+                       'width' => '40px',
+                       'index' => 'item_id'
+                   )
+               );*/
         $this->addColumn('sku',
             array(
                 'header' => Mage::helper('inventorylog')->__('SKU'),
@@ -86,7 +128,7 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
                 'header' => Mage::helper('inventorylog')->__('User is Admin'),
                 'width' => '40px',
                 'index' => 'is_admin',
-                'type'=>'options',
+                'type' => 'options',
                 'options' => array(
                     '1' => Mage::helper('catalog')->__('Yes'),
                     '0' => Mage::helper('catalog')->__('No'),
@@ -98,7 +140,7 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
                 'header' => Mage::helper('inventorylog')->__('Movement'),
                 'width' => '40px',
                 'index' => 'movement',
-                'frame_callback' =>array($this,'callback_movement')
+                'frame_callback' => array($this, 'callback_movement')
             )
         );
         $this->addColumn('qty',
@@ -106,7 +148,7 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
                 'header' => Mage::helper('inventorylog')->__('Quantity'),
                 'width' => '40px',
                 'index' => 'qty',
-                'type'=>'number'
+                'type' => 'number'
             )
         );
         $this->addColumn('is_in_stock', array(
@@ -136,11 +178,6 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
         return parent::_prepareColumns();
     }
 
-    //public function getRowUrl(Varien_Object $row)
-    //{
-    //   return $this->getUrl('*/*/edit', array('id' => $row->getId()));
-    //}
-
     protected function _prepareMassaction()
     {
         $modelPk = Mage::getModel('inventorylog/inventory')->getResource()->getIdFieldName();
@@ -152,44 +189,5 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
             'url' => $this->getUrl('*/*/massDelete'),
         ));
         return $this;
-    }
-
-    public function callback_sku($value, $row, $column, $isExport)
-    {
-        $id=$value;
-        $_product = Mage::getModel('catalog/product')->load($id);
-        if($_product->getId()){
-            $sku=$_product->getData('sku');
-            $html = sprintf(
-                '<a href="%s" title="%s">%s</a>',
-                $this->getUrl('adminhtml/catalog_product/edit', array('id' => $id)),
-                Mage::helper('inventorylog')->__('Edit Product'),
-                $sku
-            );
-        return $html;
-        }
-        return Mage::helper('inventorylog')->__("Product not in Catalog");
-    }
-
-    public function filter_sku($collection, $column)
-    {
-        if (!$value = $column->getFilter()->getValue()) {
-            return $this;
-        }
-
-        $this->getCollection()->getSelect()->where(
-            "sku like ?"
-            , "%$value%");
-
-        return $this;
-
-    }
-
-    public function callback_movement($difference)
-    {
-        if ($difference > 0) {
-            return "+" . (int)$difference;
-        }
-        return (int)$difference;
     }
 }

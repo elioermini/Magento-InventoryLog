@@ -1,14 +1,20 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Elio
  * Date: 10/10/15
  * Time: 18:10
- */ 
-class Ermini_Inventorylog_Helper_Data extends Mage_Core_Helper_Abstract {
+ */
+
+/**
+ * Class Ermini_Inventorylog_Helper_Data for utility methods
+ */
+class Ermini_Inventorylog_Helper_Data extends Mage_Core_Helper_Abstract
+{
 
     /**
-     * @return int|null
+     * @return $userId of who edited the stock of a product
      */
     public function _getUserId()
     {
@@ -23,7 +29,7 @@ class Ermini_Inventorylog_Helper_Data extends Mage_Core_Helper_Abstract {
     }
 
     /**
-     * @return string
+     * @return string $username of who edited the stock of a product
      */
     public function _getUsername()
     {
@@ -39,7 +45,11 @@ class Ermini_Inventorylog_Helper_Data extends Mage_Core_Helper_Abstract {
         return $username;
     }
 
-    public function getDate(){
+    /**
+     * @return null|string current date
+     */
+    public function getDate()
+    {
         return Varien_Date::formatDate(time());
     }
 
