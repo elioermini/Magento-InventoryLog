@@ -14,3 +14,4 @@
 "Product restocked after order cancellation (order: %s)","Product restocked after order cancellation (order: %s)"
 "Product restocked after credit memo creation (credit memo: %s)","Product restocked after credit memo creation (credit memo: %s)"
 "Stock saved from Magento API","Stock saved from Magento API"
+"Checkout","Checkout"
