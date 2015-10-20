@@ -31,11 +31,12 @@
             </inventorylog>
         </helpers>
         <resources>
-            <inventorylog_setup>
+            <ermini_inventorylog_setup>
                 <setup>
                     <module>Ermini_Inventorylog</module>
+                    <class>Ermini_Inventorylog_Model_Resource_Setup</class>
                 </setup>
-            </inventorylog_setup>
+            </ermini_inventorylog_setup>
         </resources>
         <events>
             <cataloginventory_stock_item_save_after>

@@ -24,4 +24,12 @@ class Ermini_Inventorylog_IndexController extends Mage_Core_Controller_Front_Act
         echo get_class($inventorylog);
         var_dump($data);
     }
+
+    public function testStockAction()
+    {
+        $params = $this->getRequest()->getParams();
+        $id = (int)$params['id'];
+        $stock = Mage::getModel('cataloginventory/stock_item')->load($id)->getIsInStock();
+        var_dump($stock);
+    }
 }
