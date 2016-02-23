@@ -14,7 +14,6 @@
 $installer = $this;
 
 $installer->startSetup();
-$installer->endSetup();
 // Check if the table already exists
 if ($installer->getConnection()->isTableExists('inventorylog/inventory') != true) {
     $table = $installer->getConnection()
