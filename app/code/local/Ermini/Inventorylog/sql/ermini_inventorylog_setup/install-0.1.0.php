@@ -1,14 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Elio
- * Date: 10/10/15
- * Time: 18:10
- *
  * @var $installer Mage_Core_Model_Resource_Setup *
  *
  * Create Inventory log Entity Table
- *
  *
  */
 $installer = $this;
