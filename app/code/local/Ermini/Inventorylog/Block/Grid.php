@@ -1,13 +1,6 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Elio
- * Date: 11/10/15
- * Time: 02:30
- */
-
-/**
  * Class Ermini_Inventorylog_Block_Grid is container of the table with product stock logs
  */
 class Ermini_Inventorylog_Block_Grid extends Mage_Adminhtml_Block_Widget_Grid_Container
@@ -24,6 +17,4 @@ class Ermini_Inventorylog_Block_Grid extends Mage_Adminhtml_Block_Widget_Grid_Co
         parent::__construct();
         $this->_removeButton('add');
     }
-
 }
-
