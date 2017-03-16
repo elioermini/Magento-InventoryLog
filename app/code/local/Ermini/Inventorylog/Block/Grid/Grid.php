@@ -1,13 +1,6 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Elio
- * Date: 11/10/15
- * Time: 02:30
- */
-
-/**
  * Class Ermini_Inventorylog_Block_Grid_Grid
  */
 class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid
@@ -86,13 +79,7 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
                 'index' => 'movement_id'
             )
         );
-        /*       $this->addColumn('item_id',
-                   array(
-                       'header' => Mage::helper('inventorylog')->__('Product ID'),
-                       'width' => '40px',
-                       'index' => 'item_id'
-                   )
-               );*/
+
         $this->addColumn('sku',
             array(
                 'header' => Mage::helper('inventorylog')->__('SKU'),
@@ -183,7 +170,6 @@ class Ermini_Inventorylog_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Gr
         $modelPk = Mage::getModel('inventorylog/inventory')->getResource()->getIdFieldName();
         $this->setMassactionIdField($modelPk);
         $this->getMassactionBlock()->setFormFieldName('ids');
-        // $this->getMassactionBlock()->setUseSelectAll(false);
         $this->getMassactionBlock()->addItem('delete', array(
             'label' => $this->__('Delete'),
             'url' => $this->getUrl('*/*/massDelete'),
