@@ -84,16 +84,6 @@ if ($installer->getConnection()->isTableExists('inventorylog/inventory') != true
             array('movement_id'))
         ->addIndex($installer->getIdxName('inventorylog/inventory', array('item_id')),
             array('item_id'));
-        /*@todo fix error foreign key connstraint */
-//        ->addForeignKey(
-//            $installer->getFkName(
-//                'inventorylog/inventory',
-//                'item_id',
-//                'catalog/product',
-//                'entity_id'
-//            ),
-//            'item_id', $installer->getTable('catalog/product'), 'entity_id',
-//            Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE);
     $installer->getConnection()->createTable($table);
 }
 
